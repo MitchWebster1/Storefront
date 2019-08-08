@@ -1,0 +1,14 @@
+<table>
+  <tr>
+    <th>Id</th>
+    <th>Product</th>
+    <th>Price</th>
+  </tr>
+  {{#each products}}
+  <tr>
+    <td>{{itemId}}</td>
+    <td>{{productName}}</td>
+    <td>${{price}}</td>
+  </tr>
+  {{/each}}
+</table>
