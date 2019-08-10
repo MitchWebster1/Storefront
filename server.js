@@ -3,7 +3,7 @@ const mysql = require('mysql')
 const exphbs = require('express-handlebars')
 const path = require('path')
 const routes = require('./routes/routes')
-const { showProducts, connectionEnd } = require('./javascript/functions')
+// const { showProducts, connectionEnd } = require('./javascript/functions')
 
 const app = express()
 const PORT = process.env.PORT || 3000

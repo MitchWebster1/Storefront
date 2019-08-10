@@ -5,13 +5,13 @@ CREATE DATABASE bamazon;
 USE bamazon;
 
 CREATE TABLE products (
-  itemId INT AUTO_INCREMENT NOT NULL,
+  id INT AUTO_INCREMENT NOT NULL,
   productName VARCHAR(150) NOT NULL,
   departmentName VARCHAR(150) NOT NULL,
   price DECIMAL(10,2) NOT NULL,
   stockQuantity INT NOT NULL,
   createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-  PRIMARY KEY (itemId)
+  PRIMARY KEY (id)
 );
 
 INSERT INTO products (productName, departmentName, price, stockQuantity)

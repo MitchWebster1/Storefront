@@ -5,10 +5,10 @@
     <th>Price</th>
   </tr>
   {{#each products}}
-  <tr>
-    <td>{{itemId}}</td>
-    <td>{{productName}}</td>
-    <td>${{price}}</td>
+  <tr data-href="{{id}}">
+    <td><a href="/{{id}}">{{id}}</a></td>
+    <td><a href="/{{id}}">{{productName}}</a></td>
+    <td><a href="/{{id}}">${{price}}</a></td>
   </tr>
   {{/each}}
 </table>

@@ -1,12 +1,43 @@
-body {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-  align-items: center;
-}
-
 header {
   font-size: 2em;
+}
+
+main {
+  display: flex;
+  flex-direction: row;
+  text-align: center;
+  justify-content: center;
+  align-content: space-around;
+  flex-wrap: wrap;
+}
+
+.card {
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+  max-width: 300px;
+  min-width: 250px;
+  margin: 0.5em;
+  border-radius: 5px;
+}
+
+.price {
+  color: grey;
+  font-size: 1.25em;
+}
+
+.card button {
+  border: none;
+  outline: 0;
+  padding: 12px;
+  color: white;
+  background-color: #000;
+  text-align: center;
+  cursor: pointer;
+  width: 100%;
+  font-size: 18px;
+}
+
+/* *[data-href] {
+  cursor: pointer;
 }
 
 table,
@@ -25,11 +56,24 @@ th {
   font-size: 1.5em;
 }
 
+td a {
+  display: inline-block;
+  min-height: 100%;
+  width: 100%;
+  padding: 0.25em;
+  text-decoration: none;
+}
+
+td a:visited {
+  color: blue;
+}
+
 td {
   height: 1.5rem;
   font-size: 1em;
+  color: blue;
 }
 
 tr:hover {
   background-color: #d8d6d6;
-}
+} */
