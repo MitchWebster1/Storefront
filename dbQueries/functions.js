@@ -57,7 +57,7 @@ const queryWhere = (column, value) => {
 const dbUpdate = (newQuantity, id) => {
   return new Promise((resolve, reject) => {
     connection.query(
-      'UPDATE `products` SET `stockQuantity` = ? WHERE `itemId` = ?',
+      'UPDATE `products` SET `stockQuantity` = ? WHERE `id` = ?',
       [newQuantity, id],
       (err, res) => {
         if (err) {
@@ -73,7 +73,7 @@ const dbUpdate = (newQuantity, id) => {
 const customerOrder = (id, quantity) => {
   return new Promise((resolve, reject) => {
     connection.query(
-      'SELECT * FROM `products` WHERE `itemId` = ?',
+      'SELECT * FROM `products` WHERE `id` = ?',
       [id],
       (err, res) => {
         if (err) {
@@ -81,21 +81,16 @@ const customerOrder = (id, quantity) => {
         }
         if (res[0].stockQuantity > quantity) {
           const newQuantity = res[0].stockQuantity - quantity
-          console.log("You're order is processing!")
           dbUpdate(newQuantity, id).then(() => {
-            console.log(`You're total is $${res[0].price * quantity}`, '\n')
-            return resolve(res)
+            const total = res[0].price * quantity
+            return resolve(total)
           })
         } else {
-          console.log(
-            `Sorry we only have ${res[0].stockQuantity} in stock`,
-            '\n'
-          )
-          return resolve(res)
+          return resolve('Insufficient Quantity!')
         }
       }
     )
-  }).catch(console.error)
+  })
 }
 
 const lowInventory = () => {
@@ -155,5 +150,6 @@ const newProductRow = data => {
 module.exports = {
   querySelectProducts: querySelectProducts,
   queryWhere: queryWhere,
+  customerOrder: customerOrder,
   connectionEnd: connectionEnd
 }

@@ -3,6 +3,7 @@ const router = express.Router()
 const {
   querySelectProducts,
   queryWhere,
+  customerOrder,
   connectionEnd
 } = require('../dbQueries/functions')
 
@@ -17,5 +18,9 @@ router.get('/:id', (req, res) => {
   queryWhere('id', req.params.id).then(result => res.json(result))
 })
 // .catch(res.status(500).send('Broken'))
+
+router.post('/', (req, res) => {
+  customerOrder(req.body.id, req.body.quantity).then(result => res.json(result))
+})
 
 module.exports = router

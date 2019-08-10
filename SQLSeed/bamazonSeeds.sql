@@ -25,3 +25,15 @@ VALUE
 ('Trekking Poles', 'Outdoors', 110.99, 2),
 ('Super Clicky Keyboard', 'Office', 95.99, 32),
 ('Fast Scrolling Mouse', 'Office', 45.99, 54);
+
+
+CREATE TABLE sales (
+  id INT AUTO_INCREMENT NOT NULL,
+  productName VARCHAR(150) NOT NULL,
+  departmentName VARCHAR(150) NOT NULL,
+  price DECIMAL(10,2) NOT NULL,
+  quantity INT NOT NULL,
+  total DECIMAL(10,2) NOT NULL
+  createdAt TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+  PRIMARY KEY (id)
+)
