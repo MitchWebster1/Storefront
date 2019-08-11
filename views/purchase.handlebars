@@ -1,17 +1,16 @@
+<div class="cart">
+  <h1 id="items">In Cart: 0</h1>
+  <h1 id="total">Total: $0</h1>
+  <button id="checkout">Checkout</button>
+</div>
+
 <main>
   {{#each products}}
   <div class="card">
     <h1>{{productName}}</h1>
     <p class="price">${{price}}</p>
     <p><label for="quantity">Quantity</label></p>
-    <input id="quant{{id}}" name="quantity" value="1" list="total" type="number">
-    {{!-- <datalist id="total">
-      <option value=1>1</option>
-      <option value=2>2</option>
-      <option value=3>3</option>
-      <option value=4>4</option>
-      <option value=5>5</option>
-    </datalist> --}}
+    <input id="quant{{id}}" name="quantity" value="1" type="number">
     <p><button id={{id}} class="btn">Purchase</button></p>
   </div>
   {{/each}}

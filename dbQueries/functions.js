@@ -1,13 +1,14 @@
 const mysql = require('mysql')
+const cart = []
 
-const connection =
-  mysql.createConnection(process.env.JAWSDB_URL) ||
-  mysql.createConnection({
+const connection = mysql.createConnection(
+  process.env.JAWSDB_URL || {
     host: 'localhost',
     user: 'root',
     password: 'root',
     database: 'bamazon'
-  })
+  }
+)
 
 const connectionEnd = () => {
   connection.end(err => {
@@ -42,7 +43,7 @@ const querySelectProducts = columns => {
 const queryWhere = (column, value) => {
   return new Promise((resolve, reject) => {
     connection.query(
-      'SELECT * FROM products WHERE ?? = ?',
+      'SELECT * FROM products WHERE ?? IN (?)',
       [column, value],
       (err, res) => {
         if (err) {
@@ -85,6 +86,31 @@ const customerOrder = (id, quantity) => {
             const total = res[0].price * quantity
             return resolve(total)
           })
+        } else {
+          return resolve('Insufficient Quantity!')
+        }
+      }
+    )
+  })
+}
+
+const addToCart = (id, quantity) => {
+  return new Promise((resolve, reject) => {
+    connection.query(
+      'SELECT * FROM `products` WHERE `id` = ?',
+      [id],
+      (err, res) => {
+        if (err) {
+          return reject(err)
+        }
+        if (res[0].stockQuantity > quantity) {
+          const obj = {
+            ...res[0],
+            quantity: quantity,
+            total: res[0].price * quantity
+          }
+          cart.push(obj)
+          return resolve(cart)
         } else {
           return resolve('Insufficient Quantity!')
         }
@@ -148,8 +174,10 @@ const newProductRow = data => {
 }
 
 module.exports = {
+  cart: cart,
   querySelectProducts: querySelectProducts,
   queryWhere: queryWhere,
+  addToCart: addToCart,
   customerOrder: customerOrder,
   connectionEnd: connectionEnd
 }

@@ -36,14 +36,11 @@ main {
   font-size: 18px;
 }
 
-/* *[data-href] {
-  cursor: pointer;
-}
-
 table,
 th,
 td {
   border: 1px solid black;
+  text-align: center;
 }
 
 table {
@@ -76,4 +73,8 @@ td {
 
 tr:hover {
   background-color: #d8d6d6;
-} */
+}
+
+*[data-href] {
+  cursor: pointer;
+}

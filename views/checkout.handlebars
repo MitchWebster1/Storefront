@@ -1,0 +1,26 @@
+<table>
+  <tr>
+    <th>Product</th>
+    <th>Price</th>
+    <th>Quantity</th>
+    <th>Total</th>
+  </tr>
+  {{#each products}}
+  <tr data-href="{{id}}">
+    <td>{{productName}}</td>
+    <td>${{price}}</td>
+    <td>{{quantity}}</td>
+    <td>${{total}}</td>
+  </tr>
+  {{/each}}
+  <tr>
+    <td></td>
+    <td></td>
+    <td></td>
+    <td>Grand Total = ${{cartTotal}}</td>
+  </tr>
+</table>
+
+<button type="submit" id="purchaseBtn">Purchase</button>
+
+<a href="/"><button type="submit" id="home">Home</button></a>
