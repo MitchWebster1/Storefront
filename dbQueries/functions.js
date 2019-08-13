@@ -71,27 +71,8 @@ const dbUpdate = (newQuantity, id) => {
   })
 }
 
-const customerOrder = (id, quantity) => {
-  return new Promise((resolve, reject) => {
-    connection.query(
-      'SELECT * FROM `products` WHERE `id` = ?',
-      [id],
-      (err, res) => {
-        if (err) {
-          return reject(err)
-        }
-        if (res[0].stockQuantity > quantity) {
-          const newQuantity = res[0].stockQuantity - quantity
-          dbUpdate(newQuantity, id).then(() => {
-            const total = res[0].price * quantity
-            return resolve(total)
-          })
-        } else {
-          return resolve('Insufficient Quantity!')
-        }
-      }
-    )
-  })
+const customerOrder = arr => {
+  arr.forEach(index => console.log(index))
 }
 
 const addToCart = (id, quantity) => {

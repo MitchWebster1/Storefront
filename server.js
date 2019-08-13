@@ -1,5 +1,4 @@
 const express = require('express')
-const mysql = require('mysql')
 const exphbs = require('express-handlebars')
 const path = require('path')
 const routes = require('./routes/routes')
@@ -7,15 +6,6 @@ const routes = require('./routes/routes')
 
 const app = express()
 const PORT = process.env.PORT || 3000
-
-// const connection =
-//   // mysql.createConnection(process.env.JAWSDB_URL) ||
-//   mysql.createConnection({
-//     host: 'localhost',
-//     user: 'root',
-//     password: 'root',
-//     database: 'bamazon'
-//   })
 
 app.engine('handlebars', exphbs({ defaultLayout: 'index' }))
 app.set('view engine', 'handlebars')

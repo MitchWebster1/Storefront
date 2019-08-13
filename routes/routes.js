@@ -9,10 +9,15 @@ const {
   connectionEnd
 } = require('../dbQueries/functions')
 
-router.get('/', (req, res) => {
+router.get('/', (_req, res) => {
   querySelectProducts(['id', 'productName', 'price'])
     .then(result => res.render('purchase', { products: result }))
     .catch(console.error())
+})
+
+router.get('/checkout', (_req, res) => {
+  const cartTotal = cart.reduce((acc, val) => acc.total + val.total)
+  res.render('checkout', { products: cart, cartTotal })
 })
 
 router.post('/cart', (req, res) => {
@@ -21,11 +26,9 @@ router.post('/cart', (req, res) => {
     .catch(console.error())
 })
 
-router.get('/checkout', (req, res) => {
-  // queryWhere('id', cart.map(arr => arr.res[0].id)).then(result => {
-  console.table(cart)
-  const cartTotal = cart.reduce((acc, val) => acc.total + val.total)
-  res.render('checkout', { products: cart, cartTotal })
+router.post('/purchase', (_req, res) => {
+  customerOrder(cart)
+  res.end()
 })
 
 module.exports = router
