@@ -10,6 +10,15 @@ const connection = mysql.createConnection(
   }
 )
 
+// const newConnection = () => {
+//   connection.connect((err) => {
+//     if (err) {
+
+//       return console.error('Error Connecting: ' + err.stack)
+//     }
+//   })
+// }
+
 const connectionEnd = () => {
   connection.end(err => {
     if (err) {
@@ -108,59 +117,59 @@ const addToCart = (id, quantity) => {
   })
 }
 
-const lowInventory = () => {
-  queryProducts()
-    .then(data => {
-      console.table(data.filter(quant => quant.stockQuantity < 5))
-      finished()
-    })
-    .catch(console.error)
-}
+// const lowInventory = () => {
+//   queryProducts()
+//     .then(data => {
+//       console.table(data.filter(quant => quant.stockQuantity < 5))
+//       finished()
+//     })
+//     .catch(console.error)
+// }
 
-const updateProducts = (total, answerId) => {
-  return new Promise((resolve, reject) => {
-    connection.query(
-      'UPDATE `products` SET stockQuantity = ? WHERE itemId = ?',
-      [total, answerId.id],
-      (err, res) => {
-        if (err) {
-          return reject(err)
-        }
-        return resolve(res)
-      }
-    )
-  })
-}
+// const updateProducts = (total, answerId) => {
+//   return new Promise((resolve, reject) => {
+//     connection.query(
+//       'UPDATE `products` SET stockQuantity = ? WHERE itemId = ?',
+//       [total, answerId.id],
+//       (err, res) => {
+//         if (err) {
+//           return reject(err)
+//         }
+//         return resolve(res)
+//       }
+//     )
+//   })
+// }
 
-const addInventory = () => {
-  queryProducts()
-    .then(data => {
-      console.table(data)
-      updatePrompts().then(answer => {
-        const total =
-          data.filter(id => id.itemId === answer.id)[0].stockQuantity +
-          answer.quantity
-        updateProducts(total, answer).then(() => {
-          queryProducts().then(data => {
-            console.table(data.filter(id => id.itemId === answer.id))
-            finished()
-          })
-        })
-      })
-    })
-    .catch(console.error)
-}
+// const addInventory = () => {
+//   queryProducts()
+//     .then(data => {
+//       console.table(data)
+//       updatePrompts().then(answer => {
+//         const total =
+//           data.filter(id => id.itemId === answer.id)[0].stockQuantity +
+//           answer.quantity
+//         updateProducts(total, answer).then(() => {
+//           queryProducts().then(data => {
+//             console.table(data.filter(id => id.itemId === answer.id))
+//             finished()
+//           })
+//         })
+//       })
+//     })
+//     .catch(console.error)
+// }
 
-const newProductRow = data => {
-  return new Promise((resolve, reject) => {
-    connection.query('INSERT INTO products SET ?', [data], (err, res) => {
-      if (err) {
-        return reject(err)
-      }
-      return resolve(res)
-    })
-  })
-}
+// const newProductRow = data => {
+//   return new Promise((resolve, reject) => {
+//     connection.query('INSERT INTO products SET ?', [data], (err, res) => {
+//       if (err) {
+//         return reject(err)
+//       }
+//       return resolve(res)
+//     })
+//   })
+// }
 
 module.exports = {
   cart: cart,
