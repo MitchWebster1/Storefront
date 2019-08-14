@@ -1,7 +1,7 @@
 <div class="cart">
   <h1 id="items">In Cart: 0</h1>
   <h1 id="total">Total: $0</h1>
-  <button id="checkout">Checkout</button>
+  <button onclick="getCheckout()" type="submit" id="checkout">Checkout</button>
 </div>
 
 <main>
@@ -11,7 +11,7 @@
     <p class="price">${{price}}</p>
     <p><label id="quantity{{id}}" for="quantity">Quantity</label></p>
     <input id="quant{{id}}" name="quantity" value="1" type="number">
-    <p><button id={{id}} class="btn">Purchase</button></p>
+    <p><button id={{id}} class="btn">Add to Cart</button></p>
   </div>
   {{/each}}
 </main>

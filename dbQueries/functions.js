@@ -24,6 +24,7 @@ const queryAllProducts = () => {
       if (err) {
         return reject(err)
       }
+      console.table(res)
       return resolve(res)
     })
   })
@@ -72,7 +73,14 @@ const dbUpdate = (newQuantity, id) => {
 }
 
 const customerOrder = arr => {
-  arr.forEach(index => console.log(index))
+  return new Promise((resolve, reject) => {
+    arr.forEach(index => {
+      dbUpdate(index.stockQuantity - index.quantity, index.id).then(() =>
+        arr.shift()
+      )
+    })
+    return resolve('Purchase Complete!')
+  })
 }
 
 const addToCart = (id, quantity) => {
@@ -84,7 +92,7 @@ const addToCart = (id, quantity) => {
         if (err) {
           return reject(err)
         }
-        if (res[0].stockQuantity > quantity) {
+        if (res[0].stockQuantity >= quantity) {
           const obj = {
             ...res[0],
             quantity: quantity,
@@ -156,6 +164,7 @@ const newProductRow = data => {
 
 module.exports = {
   cart: cart,
+  queryAllProducts: queryAllProducts,
   querySelectProducts: querySelectProducts,
   queryWhere: queryWhere,
   addToCart: addToCart,

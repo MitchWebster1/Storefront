@@ -2,6 +2,7 @@ const express = require('express')
 const router = express.Router()
 const {
   cart,
+  queryAllProducts,
   querySelectProducts,
   queryWhere,
   addToCart,
@@ -10,13 +11,16 @@ const {
 } = require('../dbQueries/functions')
 
 router.get('/', (_req, res) => {
+  console.table(cart)
   querySelectProducts(['id', 'productName', 'price'])
     .then(result => res.render('purchase', { products: result }))
     .catch(console.error())
 })
 
 router.get('/checkout', (_req, res) => {
-  const cartTotal = cart.reduce((acc, val) => acc.total + val.total)
+  const cartTotal = cart.reduce((acc, val) => {
+    return acc.total + val.total
+  }, 0)
   res.render('checkout', { products: cart, cartTotal })
 })
 
@@ -27,8 +31,7 @@ router.post('/cart', (req, res) => {
 })
 
 router.post('/purchase', (_req, res) => {
-  customerOrder(cart)
-  res.end()
+  customerOrder(cart).then(() => queryAllProducts())
 })
 
 module.exports = router

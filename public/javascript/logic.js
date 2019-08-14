@@ -11,29 +11,28 @@ const cartView = arr => {
   select('total').textContent = `Total: $${total(arr)}`
 }
 
-document.querySelectorAll('.btn').forEach(btn =>
-  btn.addEventListener('click', e => {
-    axios
-      .post('/cart', {
-        id: e.target.id,
-        quantity: select(`quant${e.target.id}`).value
-      })
-      .then(function (result) {
-        if (!Array.isArray(result.data)) {
-          select(`quantity${e.target.id}`).textContent = 'Insuffcient Quantity'
-          return
-        }
-        return cartView(result.data)
-      })
-  })
-)
+const addToCartPost = e => {
+  axios
+    .post('/cart', {
+      id: e.target.id,
+      quantity: select(`quant${e.target.id}`).value
+    })
+    .then(function (result) {
+      if (!Array.isArray(result.data)) {
+        select(`quantity${e.target.id}`).textContent = 'Insuffcient Quantity'
+        return
+      }
+      return cartView(result.data)
+    })
+}
 
-select('checkout').addEventListener('click', e => {
+const getCheckout = () => {
   axios.get('/checkout')
   window.location.assign('/checkout')
-})
+}
 
-select('purchaseBtn').addEventListener('click', e => {
-  console.log('click')
-  axios.post('/purchase')
-})
+const purchase = () => axios.post('/purchase')
+
+document
+  .querySelectorAll('.btn')
+  .forEach(btn => btn.addEventListener('click', addToCartPost))
