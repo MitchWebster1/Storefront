@@ -101,7 +101,7 @@ const addToCart = (id, quantity) => {
         if (err) {
           return reject(err)
         }
-        if (res[0].stockQuantity >= quantity) {
+        if (res[0].stockQuantity >= quantity && quantity > 0) {
           const obj = {
             ...res[0],
             quantity: quantity,

@@ -19,7 +19,7 @@ router.get('/', (_req, res) => {
 router.get('/checkout', (_req, res) => {
   const cartTotal = cart.reduce((acc, val) => {
     acc += val.total
-    return acc
+    return Number(acc)
   }, 0)
   res.render('checkout', { products: cart, cartTotal })
 })

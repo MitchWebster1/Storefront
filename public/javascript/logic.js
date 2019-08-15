@@ -3,7 +3,7 @@ const select = id => document.getElementById(id)
 const total = arr =>
   arr.reduce((acc, val) => {
     acc += val.price * val.quantity
-    return acc
+    return Number(acc)
   }, 0)
 
 const cartView = arr => {
@@ -19,10 +19,11 @@ const addToCartPost = e => {
     })
     .then(function(result) {
       if (!Array.isArray(result.data)) {
-        select(`quantity${e.target.id}`).textContent = 'Insuffcient Quantity'
-        return
+        select(`quantity${e.target.id}`).textContent = result.data
+      } else {
+        select(`quantity${e.target.id}`).textContent = 'Quantity'
+        return cartView(result.data)
       }
-      return cartView(result.data)
     })
 }
 
