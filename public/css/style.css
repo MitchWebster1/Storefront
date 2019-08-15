@@ -3,12 +3,17 @@ header {
   text-align: center;
 }
 
+body {
+  justify-content: center;
+}
+
 main {
+  margin: 0 auto;
   display: flex;
   flex-direction: row;
   text-align: center;
   justify-content: center;
-  align-content: space-around;
+  align-content: center;
   flex-wrap: wrap;
 }
 
@@ -17,6 +22,9 @@ main {
   width: 300px;
   margin: 1em;
   border-radius: 5px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .price {
@@ -46,6 +54,7 @@ td {
 table {
   width: 75%;
   border-collapse: collapse;
+  margin: 0 auto;
 }
 
 th {
@@ -77,4 +86,23 @@ tr:hover {
 
 *[data-href] {
   cursor: pointer;
+}
+
+.buttons button {
+  border-radius: 5px;
+  height: 3rem;
+  width: 8rem;
+  margin: 3rem;
+}
+
+.buttons {
+  display: flex;
+  justify-content: center;
+}
+
+.cart button {
+    border-radius: 5px;
+  height: 3rem;
+  width: 8rem;
+  margin: 3rem;
 }

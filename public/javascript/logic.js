@@ -17,7 +17,7 @@ const addToCartPost = e => {
       id: e.target.id,
       quantity: select(`quant${e.target.id}`).value
     })
-    .then(function (result) {
+    .then(function(result) {
       if (!Array.isArray(result.data)) {
         select(`quantity${e.target.id}`).textContent = 'Insuffcient Quantity'
         return
@@ -31,7 +31,10 @@ const getCheckout = () => {
   window.location.assign('/checkout')
 }
 
-const purchase = () => axios.post('/purchase')
+const purchase = () =>
+  axios.post('/purchase').then(result => {
+    select('header').textContent = 'Purchase Complete!'
+  })
 
 document
   .querySelectorAll('.btn')
