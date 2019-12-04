@@ -2,12 +2,9 @@ const express = require('express')
 const router = express.Router()
 const {
   cart,
-  queryAllProducts,
   querySelectProducts,
-  queryWhere,
   addToCart,
-  customerOrder,
-  connectionEnd
+  customerOrder
 } = require('../dbQueries/functions')
 
 router.get('/', (_req, res) => {

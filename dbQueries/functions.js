@@ -10,15 +10,6 @@ const connection = mysql.createConnection(
   }
 )
 
-// const newConnection = () => {
-//   connection.connect((err) => {
-//     if (err) {
-
-//       return console.error('Error Connecting: ' + err.stack)
-//     }
-//   })
-// }
-
 const connectionEnd = () => {
   connection.end(err => {
     if (err) {
